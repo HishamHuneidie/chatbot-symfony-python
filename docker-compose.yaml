@@ -1,0 +1,39 @@
+version: "3.1"
+services:
+    www:
+      container_name: www
+      build: .docker/php
+      ports: 
+        - "80:80"
+        - "9003:9003"
+      volumes:
+        - ./:/var/www/html
+      environment:
+        XDEBUG_CONFIG: remote_host=172.17.0.1 remote_port=9003 remote_enable=1
+      links:
+        - db
+      networks:
+        - chatbot-net
+    db:
+      container_name: db
+      image: mysql
+      ports: 
+        - "3306:3306"
+      command: --default-authentication-plugin=mysql_native_password
+      environment:
+        MYSQL_DATABASE: dbname
+        MYSQL_PASSWORD: test
+        MYSQL_ROOT_PASSWORD: test 
+      volumes:
+        - ./dump:/docker-entrypoint-initdb.d
+        - ./conf:/etc/mysql/conf.d
+        - persistent:/var/lib/mysql
+      networks:
+        - chatbot-net
+
+networks:
+  chatbot-net:
+    driver: bridge
+
+volumes:
+    persistent:
