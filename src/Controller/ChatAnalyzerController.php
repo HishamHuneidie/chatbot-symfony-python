@@ -21,9 +21,11 @@ class ChatAnalyzerController extends AbstractController
     public function analyze(Request $request): JsonResponse
     {
         $message = $request->request->get("message");
+        $idKey = $request->request->get("idKey");
         $response = $this->application->work();
         return $this->json([
-            "message" => $message,
+            "message" => "Your question is answered ({$message})",
+            "idKey" => $idKey,
         ]);
     }
 }

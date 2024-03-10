@@ -129,22 +129,47 @@ function minimize(e) {
 
 function sendMessage(e) {
     let button = e.currentTarget;
+    let chatbot = button.getParentByClass('chatbot');
     let inputBox = button.getParentByClass('chatbot-messenger-inputs');
     let input = inputBox.querySelector('input');
     let message = input.value.trim();
+    addAsk(chatbot, message);
 
     // Sending message
     app.ajax(
         "/analyzer/ask-ajax",
         "POST",
-        {message: message},
+        {message: message, idKey: chatbot.id},
         res => {
-            console.log('Making request...', res.toObject());
+            let response = res.toObject();
+            addAnswer(chatbot, response.message);
         },
         res => {
             console.error(res)
         },
     );
+}
+
+function addAsk(chatbot, message) {
+    let messagesContainer = chatbot.querySelector('.chatbot-messenger-messages');
+    messagesContainer.appendChild(buildMessage('right', message));
+}
+
+function addAnswer(chatbot, message) {
+    let messagesContainer = chatbot.querySelector('.chatbot-messenger-messages');
+    messagesContainer.appendChild(buildMessage('left', message));
+}
+
+function buildMessage(className, message) {
+    let messageContainer = document.createElement('div');
+    let span = document.createElement('span');
+
+    messageContainer.className = `chatbot-message chatbot-message-${className}`;
+    span.innerHTML = message;
+
+    messageContainer.appendChild(span);
+
+    return messageContainer;
 }
 
 module.exports = {
