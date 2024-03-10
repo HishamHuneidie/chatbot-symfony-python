@@ -11,6 +11,12 @@ RUN apt-get update \
     && apt-get install -y libonig-dev \
     && apt-get install -y libyaml-dev
 
+######### Nodejs and yarn #########
+
+RUN curl -sL https://deb.nodesource.com/setup_20.x | bash
+RUN apt-get install -ym nodejs
+RUN npm install --global yarn
+
 ######### PHP EXTENSIONS #########
 
 RUN pecl install yaml-2.2.3 \
@@ -24,7 +30,6 @@ RUN docker-php-ext-install mysqli
 RUN docker-php-ext-install mbstring
 RUN docker-php-ext-install zip
 RUN docker-php-ext-install gd
-RUN docker-php-ext-install pcntl
 
 ######### cleaning #########
 
@@ -37,6 +42,12 @@ RUN a2enmod rewrite
 ######### installing composer #########
 
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
+
+######### Modifying apache config #########
+
+ADD config/sites-available/default-ssl.conf /etc/apache2/sites-available/default-ssl.conf
+ADD config/sites-available/000-default.conf /etc/apache2/sites-available/000-default.conf
+ADD config/sites-enabled/000-default.conf /etc/apache2/sites-enabled/000-default.conf
 
 WORKDIR /var/www/html
 EXPOSE 9003

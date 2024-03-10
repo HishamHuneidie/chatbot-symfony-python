@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+{% block title %}Chatbot{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('js/index') }}
+{% endblock %}
+
+{% block body %}
+    <header>
+        <ul class="slider">
+            <li class="slider-item">
+                <img src="{{ asset('img/slider-1.jpg') }}" alt="Slider image">
+            </li>
+        </ul>
+    </header>
+    <div class="section">
+        <div class="box">
+            <div class="box-item"></div>
+            <div class="box-item"></div>
+            <div class="box-item"></div>
+        </div>
+    </div>
+{% endblock %}

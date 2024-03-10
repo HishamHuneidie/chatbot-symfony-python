@@ -1,0 +1,169 @@
+
+.chatbot-container {
+    --chatbot-gap:20px;
+    --chatbot-button-size:40px;
+    --chatbot-messenger-width:400px;
+    --chatbot-messenger-header-height:40px;
+    --chatbot-messenger-inputs-height:70px;
+    --chatbot-messenger-messages-height:calc( 100% - var(--chatbot-messenger-header-height) - var(--chatbot-messenger-inputs-height) );
+    --chatbot-radius:10px;
+    position:fixed;
+    z-index:999999;
+    bottom:0;
+    right:0;
+    margin:var(--chatbot-gap);
+}
+
+.chatbot-container > .chatbot {
+    margin-bottom:var(--chatbot-gap);
+    width:var(--chatbot-button-size);
+    height:var(--chatbot-button-size);
+    position:relative;
+    z-index:99;
+}
+.chatbot-container > .chatbot > .chatbot-button {
+    width:var(--chatbot-button-size);
+    height:var(--chatbot-button-size);
+    line-height:var(--chatbot-button-size);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.chatbot-container > .chatbot > .chatbot-messenger-container {
+    width:var(--chatbot-messenger-width);
+    height:550px;
+    background:#fff;
+    box-shadow:0 0 10px 5px rgba(0,0,0,.06);
+    position:absolute;
+    z-index:100;
+    bottom:100%;
+    right:100%;
+    border-radius:var(--chatbot-radius);
+    overflow:hidden;
+
+    transition:.4s ease;
+    opacity:0;
+    visibility:hidden;
+    transform:translateY(20px);
+}
+.chatbot-container > .chatbot.show > .chatbot-messenger-container {
+    opacity:1;
+    visibility:visible;
+    transform:translateY(0);
+}
+
+
+/* ---------------- Header ---------------- */
+/* ---------------- Header ---------------- */
+/* ---------------- Header ---------------- */
+
+
+.chatbot-container > .chatbot > .chatbot-messenger-container > .chatbot-messenger-header {
+    width:100%;
+    height:var(--chatbot-messenger-header-height);
+    background:#25262a;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+.chatbot-container > .chatbot > .chatbot-messenger-container > .chatbot-messenger-header > p {
+    height:var(--chatbot-messenger-header-height);
+    line-height:var(--chatbot-messenger-header-height);
+    color:#fff;
+    padding:0 10px;
+    user-select:none;
+}
+.chatbot-container > .chatbot > .chatbot-messenger-container > .chatbot-messenger-header > .chatbot-messenger-header-icons {
+    display:flex;
+}
+.chatbot-container > .chatbot > .chatbot-messenger-container > .chatbot-messenger-header > .chatbot-messenger-header-icons .chatbot-icon {
+    width:var(--chatbot-messenger-header-height);
+    height:var(--chatbot-messenger-header-height);
+    line-height:var(--chatbot-messenger-header-height);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#fff;
+    background:rgba(255,255,255,.1);
+    user-select:none;
+    cursor:pointer;
+}
+.chatbot-container > .chatbot > .chatbot-messenger-container > .chatbot-messenger-header > .chatbot-messenger-header-icons .chatbot-icon:hover {
+    background:rgba(255,255,255,.3);
+}
+
+
+/* ---------------- Messages ---------------- */
+/* ---------------- Messages ---------------- */
+/* ---------------- Messages ---------------- */
+
+
+.chatbot-container > .chatbot > .chatbot-messenger-container > .chatbot-messenger-messages {
+    --chatbot-message-gap:15px;
+    height:var(--chatbot-messenger-messages-height);
+    width:100%;
+    overflow-x:hidden;
+    overflow-y:auto;
+    padding-top:var(--chatbot-message-gap);
+}
+.chatbot-container > .chatbot > .chatbot-messenger-container > .chatbot-messenger-messages .chatbot-message {
+    width:100%;
+    display:flex;
+    align-items:center;
+    justify-content:flex-start;
+    padding:0 var(--chatbot-message-gap) var(--chatbot-message-gap) var(--chatbot-message-gap);
+}
+.chatbot-container > .chatbot > .chatbot-messenger-container > .chatbot-messenger-messages .chatbot-message.chatbot-message-left {
+    justify-content:flex-start;
+}
+.chatbot-container > .chatbot > .chatbot-messenger-container > .chatbot-messenger-messages .chatbot-message.chatbot-message-right {
+    justify-content:flex-end;
+}
+.chatbot-container > .chatbot > .chatbot-messenger-container > .chatbot-messenger-messages .chatbot-message > span {
+    width:80%;
+    padding:var(--chatbot-message-gap);
+    border-radius:var(--chatbot-radius);
+}
+.chatbot-container > .chatbot > .chatbot-messenger-container > .chatbot-messenger-messages .chatbot-message.chatbot-message-left > span {
+    background:rgba(0,0,0,.1);
+}
+.chatbot-container > .chatbot > .chatbot-messenger-container > .chatbot-messenger-messages .chatbot-message.chatbot-message-right > span {
+    background:rgba(0,0,0,.06);
+}
+
+
+/* ---------------- Inputs ---------------- */
+/* ---------------- Inputs ---------------- */
+/* ---------------- Inputs ---------------- */
+
+
+.chatbot-container > .chatbot > .chatbot-messenger-container > .chatbot-messenger-inputs {
+    --chatbot-inputs-gap:15px;
+    --chatbot-input-height:calc( var(--chatbot-messenger-inputs-height) - calc(var(--chatbot-inputs-gap) * 2) );
+    height:var(--chatbot-messenger-inputs-height);
+    width:100%;
+    overflow:hidden;
+    display:flex;
+    padding:var(--chatbot-inputs-gap);
+}
+.chatbot-container > .chatbot > .chatbot-messenger-container > .chatbot-messenger-inputs > input {
+    height:var(--chatbot-input-height);
+    width:calc( 100% - var(--chatbot-inputs-gap) - var(--chatbot-input-height) );
+    border:1px solid #ccc;
+    border-radius:calc( var(--chatbot-input-height) / 2 );
+    padding:0 var(--chatbot-inputs-gap);
+    margin-right:var(--chatbot-inputs-gap);
+}
+.chatbot-container > .chatbot > .chatbot-messenger-container > .chatbot-messenger-inputs > button {
+    height:var(--chatbot-input-height);
+    line-height:var(--chatbot-input-height);
+    width:var(--chatbot-input-height);
+    border-radius:calc( var(--chatbot-input-height) / 2 );
+    text-align:center;
+    border:1px solid #ccc;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+}

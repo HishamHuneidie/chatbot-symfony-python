@@ -1,0 +1,53 @@
+@import url('menu.css');
+@import url('header.css');
+@import url('sections.css');
+@import url('chatbot.css');
+
+* {
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:sans-serif;
+    font-size:14px;
+    color:#666;
+}
+
+:root {
+    --chatbot-app-red:#dc3545;
+    --chatbot-app-blue:#0d6efd;
+    --chatbot-app-green:#198754;
+    --chatbot-app-yellow:#ffc107;
+}
+
+html {
+    width:100vw;
+    height:100vh;
+}
+
+body {
+    width:100vw;
+    height:100vh;
+    overflow:hidden;
+}
+
+
+.web-container {
+    width:100%;
+    height:100%;
+    display:flex;
+}
+.web-container > .menu-container {
+    width:300px;
+    height:100%;
+    overflow:hidden;
+    position:relative;
+    z-index:2;
+    box-shadow:10px 5px 5px rgba(0,0,0,.1);
+}
+.web-container > .body-container {
+    width:calc(100% - 300px);
+    height:100%;
+    overflow:auto;
+    position:relative;
+    z-index:1;
+}
