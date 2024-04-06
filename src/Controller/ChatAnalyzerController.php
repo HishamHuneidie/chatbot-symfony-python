@@ -22,9 +22,9 @@ class ChatAnalyzerController extends AbstractController
     {
         $message = $request->request->get("message");
         $idKey = $request->request->get("idKey");
-        $response = $this->application->work();
+        $response = $this->application->work($message);
         return $this->json([
-            "message" => "Your question is answered ({$message})",
+            "message" => $response['message'] ?? "Empty message...",
             "idKey" => $idKey,
         ]);
     }

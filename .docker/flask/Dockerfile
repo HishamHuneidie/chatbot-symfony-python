@@ -8,5 +8,9 @@ RUN pip install -r requirements.txt
 
 EXPOSE 5000
 
-ENTRYPOINT ["python"]
-CMD ["app.py"]
+RUN pip install debugpy
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+ENV DEBIAN_FRONTEND=noninteractive
+
+CMD ["python", "-m", "debugpy", "--listen", "0.0.0.0:5679", "app.py"]

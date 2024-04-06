@@ -1,49 +1,55 @@
 version: "3.1"
 services:
-    www:
-      container_name: www
-      build: .docker/php
-      ports: 
-        - "80:80"
-      volumes:
-        - ./:/var/www/html
-      environment:
-        XDEBUG_CONFIG: remote_host=172.17.0.1 remote_port=9003 remote_enable=1
-      links:
-        - db
-      networks:
-        - chatbot-net
-    flask:
-      container_name: flask
-      build: .docker/flask
-      volumes:
-        - .docker/flask:/app
-      links:
-        - db
-      ports:
-        - "5000:5000"
-      networks:
-        - chatbot-net
-    db:
-      container_name: db
-      image: mysql
-      ports: 
-        - "3306:3306"
-      command: --default-authentication-plugin=mysql_native_password
-      environment:
-        MYSQL_DATABASE: dbname
-        MYSQL_PASSWORD: test
-        MYSQL_ROOT_PASSWORD: test 
-      volumes:
-        - ./dump:/docker-entrypoint-initdb.d
-        - ./conf:/etc/mysql/conf.d
-        - persistent:/var/lib/mysql
-      networks:
-        - chatbot-net
+  www:
+    container_name: www
+    build: .docker/php
+    ports:
+      - "80:80"
+    volumes:
+      - ./:/var/www/html
+    environment:
+      XDEBUG_CONFIG: remote_host=172.17.0.1 remote_port=9003 remote_enable=1
+    links:
+      - db
+    networks:
+      - chatbot-net
+  flask:
+    container_name: flask
+    build: .docker/flask
+    volumes:
+      - .docker/flask:/app
+    links:
+      - db
+    ports:
+      - "5000:5000"
+      - "5679:5679"
+    environment:
+      - FLASK_APP=app.py
+      - FLASK_ENV=development
+      - FLASK_DEBUG=1
+    entrypoint: [ "python", "-m", "debugpy", "--listen", "0.0.0.0:5679", "-m", "app",  "--wait-for-client", "--multiprocess", "-m", "flask", "run", "-h", "0.0.0.0", "-p", "5000" ]
+    networks:
+      - chatbot-net
+  db:
+    container_name: db
+    image: mysql
+    ports:
+      - "3306:3306"
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_DATABASE: dbname
+      MYSQL_PASSWORD: test
+      MYSQL_ROOT_PASSWORD: test
+    volumes:
+      - ./dump:/docker-entrypoint-initdb.d
+      - ./conf:/etc/mysql/conf.d
+      - persistent:/var/lib/mysql
+    networks:
+      - chatbot-net
 
 networks:
   chatbot-net:
     driver: bridge
 
 volumes:
-    persistent:
+  persistent:

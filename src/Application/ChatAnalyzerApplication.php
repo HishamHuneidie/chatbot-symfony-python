@@ -13,10 +13,8 @@ class ChatAnalyzerApplication extends AbstractApplication
     {
     }
 
-    public function work(): mixed
+    public function work(string $message): mixed
     {
-        $test = $this->connector->getTest();
-        $chat = $this->connector->getChat();
-        return null;
+        return $this->connector->getTest($message);
     }
 }

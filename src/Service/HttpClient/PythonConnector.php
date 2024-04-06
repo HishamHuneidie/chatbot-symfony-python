@@ -6,10 +6,12 @@ class PythonConnector extends AbstractHttpClient
 {
     const PYTHON_PATH = 'http://flask:5000';
 
-    public function getTest(): mixed
+    public function getTest(string $question): mixed
     {
         $path = self::PYTHON_PATH . "/";
-        return $this->doGet($path, 'array');
+        return $this->doGet($path, 'array', [
+            'question' => $question,
+        ]);
     }
 
     public function getChat(): mixed
