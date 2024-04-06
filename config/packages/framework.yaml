@@ -17,6 +17,7 @@ framework:
     #fragments: true
     php_errors:
         log: true
+    ide: 'phpstorm://open?file=%%f&line=%%l&%kernel.project_dir%>%env(IDE_PROJECT_DIR)%'
 
 when@test:
     framework:

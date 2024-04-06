@@ -50,4 +50,4 @@ ADD config/sites-available/000-default.conf /etc/apache2/sites-available/000-def
 ADD config/sites-enabled/000-default.conf /etc/apache2/sites-enabled/000-default.conf
 
 WORKDIR /var/www/html
-EXPOSE 9003
+EXPOSE 9000
