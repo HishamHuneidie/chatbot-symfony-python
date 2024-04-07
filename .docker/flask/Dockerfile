@@ -6,6 +6,9 @@ WORKDIR /app
 RUN pip install Flask
 RUN pip install -r requirements.txt
 
+RUN pip install spacy && \
+    python -m spacy download es_core_news_sm
+
 EXPOSE 5000
 
 RUN pip install debugpy

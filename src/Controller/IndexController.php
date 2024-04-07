@@ -20,8 +20,7 @@ class IndexController extends AbstractController
     #[Route('/', name: 'app_index')]
     public function index(PythonConnector $connector): Response
     {
-        $cambur = $connector->getTest();
-        $response = $this->application->work();
+        //$response = $this->application->work();
         return $this->render('index/index.html.twig', [
             "name" => "Hisham"
         ]);
