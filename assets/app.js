@@ -8,5 +8,13 @@
 // any CSS you import will output into a single css file (app.css in this case)
 import './styles/app.css';
 import ChatbotApp from './ChatbotApp';
+import ChatResponse from './js/model/chat/Response';
+import ChatRequest from './js/model/chat/Request';
+
+
 const app = ChatbotApp.getInstance();
+
+
 window.app = app;
+window.ChatResponse = ChatResponse;
+window.ChatRequest = ChatRequest;

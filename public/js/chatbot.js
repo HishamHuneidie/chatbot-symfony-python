@@ -128,6 +128,8 @@ function minimize(e) {
 }
 
 function sendMessage(e) {
+
+    // Nodes declaration
     let button = e.currentTarget;
     let chatbot = button.getParentByClass('chatbot');
     let inputBox = button.getParentByClass('chatbot-messenger-inputs');
@@ -135,14 +137,16 @@ function sendMessage(e) {
     let message = input.value.trim();
     addAsk(chatbot, message);
 
+    let request = new ChatRequest(message, chatbot.id);
+
     // Sending message
     app.ajax(
-        "/analyzer/ask-ajax",
+        "/chat/ask-ajax",
         "POST",
-        {message: message, idKey: chatbot.id},
+        request.toObject(),
         res => {
-            let response = res.toObject();
-            addAnswer(chatbot, response.message);
+            let response = ChatResponse.fromString(res);
+            addAnswer(chatbot, response.getAnswer());
         },
         res => {
             console.error(res)

@@ -7,7 +7,7 @@ class ChatbotApp {
         let form = this.#buildForm(params);
 
         xhr.addEventListener('load', e => {
-            console.log(xhr.status);
+            console.warn(xhr.status);
             if (xhr.status >= 200 && xhr.status < 300) {
                 if (getClass(successCallback) === 'Function') {
                     successCallback(xhr.responseText);

@@ -7,9 +7,5 @@ IndexController = Blueprint('IndexController', __name__)
 
 @IndexController.route('/')
 def index():
-    # Params
-    question = request.args.get('question')
 
-    answer = processRequest(question)
-
-    return {'message': answer}
+    return {'answer': 'index'}

@@ -56,6 +56,9 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/property-info" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/serializer" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/web-profiler-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/.docker/flask/venv/Lib" />
+      <excludeFolder url="file://$MODULE_DIR$/.docker/flask/venv/Scripts" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor" />
     </content>
     <orderEntry type="jdk" jdkName="Python 3.12 (flask)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
