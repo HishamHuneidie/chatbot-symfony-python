@@ -9,14 +9,6 @@
 /vendor/
 ###< symfony/framework-bundle ###
 
-
-###> ides ###
-/.idea/
-/.idea/*
-/.vscode/
-/.vscode/*
-###< ides ###
-
 ###> symfony/webpack-encore-bundle ###
 /node_modules/
 /public/build/
